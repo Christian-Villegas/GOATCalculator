@@ -1,7 +1,0 @@
-Summary : THE G.O.A.T. Calculator
-
-	For our project, we decided to make the G.O.A.T. calulator: a program that empirically determines the G.O.A.T. of basketball to put to rest the decades-long debate. In order to do this we scraped the names and years of the best teams in each franchise's history from https://bleacherreport.com/articles/2216547-each-nba-franchises-best-team-ever#slide1. We then scraped all of the players from each team and compared them on the basis of wins over other players, and per-game statistics within their teams (the specifics of which can be read in the readMe). Each player is given a point total out of 100 with the highest totals being the goats. 
-
-In this assignment we used a Graph, and our Webscraping with jsoup and regular expressions was related to the information retrieval.
-
-Christian Villegas handled the web scraping, pattern matching, and everything in the parse class. Both Davies Lumumba and Alex Scott worked on creating the playerEntry type as well as creating the statistics class which handled the actual calculation and distribution of points. 
