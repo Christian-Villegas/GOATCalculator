@@ -255,6 +255,10 @@ public class Parse {
             statistic = "trb_per_g";
         } else if (statistic.equals("FG")) {
             statistic = "fg_pct";
+        } else if (statistic.equals("STL")) {
+            statistic = "stl";
+        } else if (statistic.equals("BLK")){
+            statistic = "blk";
         }
         //only want to check stats for curr team, iterates through players list to find team
         int startIndex = Integer.MAX_VALUE;

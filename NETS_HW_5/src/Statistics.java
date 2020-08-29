@@ -4,6 +4,7 @@ public class Statistics {
     private Parse teamParser;
     //List to store the points each player has collected based on their career stats
     private List<PlayerEntry> totalPts;
+    private String [] desiredStats;
 
     /**
      * Constructor for the statistics class. Makes all preliminary calls to functions in Parse.Java
@@ -19,7 +20,7 @@ public class Statistics {
         teamParser.getTeamsGamesPages();
         getPlayers();
         teamParser.initPlayerGraph();
-
+        this.desiredStats = desiredStats;
     }
 
     /**
@@ -47,19 +48,14 @@ public class Statistics {
      * @param - N/A
      * @return - N/A
      */
-    public void trackStats() {
+    public void trackStats(String[] desiredStats) {
         for (String teamName : teamParser.getStatPageMap().keySet()) {
             teamParser.getTeamStatPage(teamName);
-            PriorityQueue<PlayerEntry> tempAST = teamParser.statPointAllocator("AST", teamName);
-            givePoints(tempAST);
-            PriorityQueue<PlayerEntry> tempPPG = teamParser.statPointAllocator("PPG", teamName);
-            givePoints(tempPPG);
-            PriorityQueue<PlayerEntry> tempFT = teamParser.statPointAllocator("FT", teamName);
-            givePoints(tempFT);
-            PriorityQueue<PlayerEntry> tempTRB = teamParser.statPointAllocator("TRB", teamName);
-            givePoints(tempTRB);
-            PriorityQueue<PlayerEntry> tempFG = teamParser.statPointAllocator("FG", teamName);
-            givePoints(tempFG);
+            for(String stat : desiredStats){
+                PriorityQueue<PlayerEntry> temp = teamParser.statPointAllocator(stat, teamName);
+                givePoints(temp);
+            }
+            System.out.println("Tracking stats for " + teamName + "...");
         }
         //organize list in descending order of points
         Collections.sort(totalPts);
@@ -152,20 +148,6 @@ public class Statistics {
             topPlayers.add(totalPts.get(i));
         }
         return topPlayers;
-    }
-
-    /**
-     * Gets an encapsulated totalPts ArrayList
-     *
-     * @param - N/A
-     * @return - List<PlayerEntry>
-     */
-    public List<PlayerEntry> getTotalPts() {
-        List<PlayerEntry> copy = new ArrayList<>();
-        for (PlayerEntry player : totalPts) {
-            copy.add(new PlayerEntry(player.getKey(), player.getValue()));
-        }
-        return copy;
     }
 
 }
